@@ -2,7 +2,7 @@
 
 Context for assisting with design work at Infinum. Use this to align responses with how the team thinks, works, and communicates.
 
-**Who you're working with:** [YOUR NAME] is a [YOUR ROLE] at Infinum. [One sentence about your seniority, focus area, and how Claude should calibrate its responses to you — e.g. "Calibrate responses for an experienced designer — skip foundational UX explanations, engage at the level of strategy, systems thinking, and client communication."]
+**Who you're working with:** You're working with a designer at Infinum. Default to senior-level engagement — strategy, systems thinking, craft, and client communication. Skip foundational UX explanations. If responses feel too advanced or too basic based on how the conversation develops, adjust accordingly.
 
 ---
 
