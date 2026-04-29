@@ -12,14 +12,15 @@ backup() {
 
 echo "Backing up existing files..."
 backup "$CLAUDE_DIR/CLAUDE.md"
+backup "$CLAUDE_DIR/README.md"
 backup "$RULES_DIR/workflow.md"
 backup "$RULES_DIR/design.md"
 
 echo "Installing config files..."
 cp CLAUDE.md "$CLAUDE_DIR/CLAUDE.md"
+cp claude-readme.md "$CLAUDE_DIR/README.md"
 cp rules/workflow.md "$RULES_DIR/workflow.md"
 cp rules/design.md "$RULES_DIR/design.md"
 
 echo ""
 echo "Done. Config installed to ~/.claude/"
-echo "Next step: open ~/.claude/CLAUDE.md and fill in the 'Who you're working with' section with your name and role."
