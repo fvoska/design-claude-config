@@ -1,6 +1,9 @@
 # design-claude-config
 
-Shared Claude Code global configuration for the Infinum design team. These files tell Claude how to work with Infinum designers — our philosophy, process, response format, and design skills.
+Shared Claude Code configuration for the Infinum design team — our philosophy,
+process, response format, and skill-invocation rules. Layers on top of two
+community marketplaces (designer skills + inclusive design skills) without
+overwriting your personal Claude config.
 
 ## Prerequisites
 
@@ -15,27 +18,94 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-Then open `~/.claude/CLAUDE.md` and fill in the **"Who you're working with"** section with your own name and role. This is the most important step — it tells Claude who it's talking to and how to calibrate its responses for you specifically.
+The script will:
+
+1. Add the two community marketplaces (`not-alpha/design-team-skills`,
+   `not-alpha/inclusive-design-skills`) via `claude plugin marketplace add`.
+2. Install Infinum house rules into a namespaced directory you own:
+   `~/.claude/infinum/`.
+3. Append **one** `@import` line to `~/.claude/CLAUDE.md` — your personal
+   file is preserved.
+
+After it finishes:
+
+- **Personalize**: edit `~/.claude/infinum/whoami.md` so Claude knows your role.
+- **Install plugins**: open Claude Code, run `/plugin`, then in the Discover
+  tab install whichever skills you want from the two marketplaces.
 
 ## Updating
 
-When the config files change, pull and re-run the script. Your existing files are automatically backed up as `.bak` before being overwritten.
+When the config changes, pull and re-run. Re-runs are idempotent — your
+personalization in `whoami.md` is preserved, and the import line is only
+added if missing.
 
 ```bash
 git pull
 ./setup.sh
 ```
 
-## What's included
+## What this repo does NOT mirror
 
-| File | Installs to | What it does |
+This repo contains **only Infinum-specific rules and policy**. It does
+not vendor, mirror, or copy any community plugin folders. The community
+marketplaces stay under their own maintenance — we just add them via
+the `claude plugin marketplace add` command in `setup.sh`.
+
+## What gets installed
+
+| Source file (this repo) | Installed to | Owner | Overwritten on re-run? |
+|---|---|---|---|
+| `CLAUDE.md` | `~/.claude/infinum/philosophy.md` | this repo | yes |
+| `rules/workflow.md` | `~/.claude/infinum/workflow.md` | this repo | yes |
+| `rules/design.md` | `~/.claude/infinum/design.md` | this repo | yes |
+| _(generated)_ | `~/.claude/infinum/whoami.md` | the user | **no** (preserved) |
+| _(generated)_ | `~/.claude/infinum/index.md` | this repo | yes |
+| _(one line appended)_ | `~/.claude/CLAUDE.md` | the user | no (idempotent) |
+
+The `index.md` file is what `~/.claude/CLAUDE.md` imports — it just chains
+the four other files via `@import`.
+
+## How it loads
+
+Claude Code reads `~/.claude/CLAUDE.md` at session start. Our one appended
+line is `@~/.claude/infinum/index.md`, which in turn imports the four rule
+files. Same loading semantics as inline content, with full isolation.
+
+```
+~/.claude/CLAUDE.md
+└── @~/.claude/infinum/index.md
+    ├── @whoami.md       ← who you are (you edit this)
+    ├── @philosophy.md   ← Infinum design philosophy + key terms
+    ├── @workflow.md     ← session start, process, AI policy, project template
+    └── @design.md       ← skill invocation policy, Figma rules, critique format
+```
+
+## Skill plugins
+
+Skills come from two community marketplaces, not from this repo:
+
+| Marketplace | Skills | What's covered |
 |---|---|---|
-| `CLAUDE.md` | `~/.claude/CLAUDE.md` | Core Infinum design philosophy, way of working, key terms |
-| `rules/workflow.md` | `~/.claude/rules/workflow.md` | Session start checklist, process phases, AI usage rules |
-| `rules/design.md` | `~/.claude/rules/design.md` | Designer skills reference, Figma integration, critique format |
+| [`design-team-skills`](https://github.com/not-alpha/design-team-skills) | 63 skills, 8 plugins | Research, systems, strategy, UI, interaction, prototyping, ops, toolkit |
+| [`inclusive-design-skills`](https://github.com/not-alpha/inclusive-design-skills) | 40 skills, 6 plugins | Cognitive, interaction, content, personas, adaptive, decisions |
 
-## What's NOT included
+Both currently point at our forks. Once upstream contributions land, they
+will switch to `Owl-Listener/designer-skills` and `Owl-Listener/inclusive-design-skills`.
 
-- **Project-specific `CLAUDE.md` files** — these live inside each project folder and are not shared here
-- **Memory files** — Claude's session memory is personal and stays on your machine
-- **Plugin/skill files** — skills are installed separately via the Claude Code plugin system
+## Uninstall
+
+```bash
+# 1. Remove the import line from ~/.claude/CLAUDE.md (one line, marked with
+#    "managed by design-claude-config")
+# 2. Remove the namespace
+rm -rf ~/.claude/infinum
+# 3. Remove the marketplaces (optional)
+claude plugin marketplace remove design-team-skills
+claude plugin marketplace remove inclusive-design-skills
+```
+
+## Making changes
+
+- Open a PR with rationale.
+- Test in at least one real session before merging.
+- Review cadence: quarterly, or after any major process change.
