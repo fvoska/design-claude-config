@@ -11,11 +11,10 @@ overwriting your personal Claude config.
 
 ## Setup
 
+One command, no clone required:
+
 ```bash
-git clone https://github.com/not-alpha/design-claude-config.git
-cd design-claude-config
-chmod +x setup.sh
-./setup.sh
+npx -y github:not-alpha/design-claude-config
 ```
 
 The script will:
@@ -25,7 +24,7 @@ The script will:
 2. Install Infinum house rules into a namespaced directory you own:
    `~/.claude/infinum/`.
 3. Append **one** `@import` line to `~/.claude/CLAUDE.md` — your personal
-   file is preserved.
+   file is preserved, never stomped.
 
 After it finishes:
 
@@ -33,15 +32,28 @@ After it finishes:
 - **Install plugins**: open Claude Code, run `/plugin`, then in the Discover
   tab install whichever skills you want from the two marketplaces.
 
-## Updating
+### Alternative: clone and run
 
-When the config changes, pull and re-run. Re-runs are idempotent — your
-personalization in `whoami.md` is preserved, and the import line is only
-added if missing.
+If you'd rather inspect the script before running it, or you don't have Node:
 
 ```bash
-git pull
+git clone https://github.com/not-alpha/design-claude-config.git
+cd design-claude-config
 ./setup.sh
+```
+
+Both paths run the same `setup.sh` — `npx` just clones to a tmp dir for you.
+
+## Updating
+
+Re-runs are idempotent — your `whoami.md` personalization is preserved, the
+import line is added only if missing, and existing marketplaces aren't
+re-added.
+
+```bash
+npx -y github:not-alpha/design-claude-config
+# or, if you cloned the repo:
+cd <clone> && git pull && ./setup.sh
 ```
 
 ## What this repo does NOT mirror

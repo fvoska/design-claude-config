@@ -1,0 +1,25 @@
+{
+  "name": "design-claude-config",
+  "version": "1.0.0",
+  "description": "Infinum design team Claude Code setup — adds two community marketplaces and Infinum house rules without overwriting your personal CLAUDE.md.",
+  "bin": {
+    "design-claude-config": "./bin/install.js"
+  },
+  "scripts": {
+    "setup": "./setup.sh"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/not-alpha/design-claude-config"
+  },
+  "keywords": [
+    "claude-code",
+    "claude",
+    "design",
+    "infinum"
+  ]
+}

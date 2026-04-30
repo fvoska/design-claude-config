@@ -16,6 +16,12 @@
 # =============================================================================
 set -euo pipefail
 
+# Resolve the directory this script lives in so `cp CLAUDE.md ...` etc.
+# work whether invoked as `./setup.sh`, from a parent dir, or via the
+# Node shim under `bin/install.js` (which `npx` runs from a tmp clone).
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$SCRIPT_DIR"
+
 CLAUDE_DIR="${HOME}/.claude"
 INFINUM_DIR="${CLAUDE_DIR}/infinum"
 USER_CLAUDE_MD="${CLAUDE_DIR}/CLAUDE.md"
@@ -122,7 +128,8 @@ ${BOLD}Next:${NC}
     marketplaces above (8 design + 6 inclusive plugins available).
 
 ${BOLD}Updating later:${NC}
-  ${DIM}cd $(pwd) && git pull && ./setup.sh${NC}
+  ${DIM}npx -y github:not-alpha/design-claude-config${NC}
+  ${DIM}# or, if you cloned the repo: cd <clone> && git pull && ./setup.sh${NC}
 
 ${BOLD}Uninstall:${NC}
   Remove the line "${DIM}${IMPORT_LINE}${NC}" from ~/.claude/CLAUDE.md
