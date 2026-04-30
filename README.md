@@ -67,12 +67,16 @@ the `claude plugin marketplace add` command in `setup.sh`.
 
 | Source file (this repo) | Installed to | Owner | Overwritten on re-run? |
 |---|---|---|---|
-| `CLAUDE.md` | `~/.claude/infinum/philosophy.md` | this repo | yes |
+| `rules/philosophy.md` | `~/.claude/infinum/philosophy.md` | this repo | yes |
 | `rules/workflow.md` | `~/.claude/infinum/workflow.md` | this repo | yes |
 | `rules/design.md` | `~/.claude/infinum/design.md` | this repo | yes |
 | _(generated)_ | `~/.claude/infinum/whoami.md` | the user | **no** (preserved) |
 | _(generated)_ | `~/.claude/infinum/index.md` | this repo | yes |
 | _(one line appended)_ | `~/.claude/CLAUDE.md` | the user | no (idempotent) |
+
+> Note: this repo's own `CLAUDE.md` is **not** installed. It's
+> repo-context for Claude when editing this project (the install
+> pattern, conventions, testing) — not design rules for users.
 
 The `index.md` file is what `~/.claude/CLAUDE.md` imports — it just chains
 the four other files via `@import`.

@@ -74,10 +74,10 @@ done
 step "Installing Infinum house rules to ~/.claude/infinum/"
 mkdir -p "$INFINUM_DIR"
 
-# Source files in this repo → installed names in our namespace
-cp CLAUDE.md         "$INFINUM_DIR/philosophy.md"
-cp rules/workflow.md "$INFINUM_DIR/workflow.md"
-cp rules/design.md   "$INFINUM_DIR/design.md"
+# Source files in rules/ → same names under our namespace
+cp rules/philosophy.md "$INFINUM_DIR/philosophy.md"
+cp rules/workflow.md   "$INFINUM_DIR/workflow.md"
+cp rules/design.md     "$INFINUM_DIR/design.md"
 ok "Wrote philosophy.md, workflow.md, design.md"
 
 # Personalization stub — only created if missing, so re-runs preserve edits
