@@ -128,7 +128,7 @@ ${BOLD}Next:${NC}
     marketplaces above (8 design + 6 inclusive plugins available).
 
 ${BOLD}Updating later:${NC}
-  ${DIM}npx -y github:not-alpha/design-claude-config${NC}
+  ${DIM}npx -y github:infinum/design-claude-config${NC}
   ${DIM}# or, if you cloned the repo: cd <clone> && git pull && ./setup.sh${NC}
 
 ${BOLD}Uninstall:${NC}

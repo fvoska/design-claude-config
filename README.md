@@ -7,14 +7,20 @@ overwriting your personal Claude config.
 
 ## Prerequisites
 
-[Claude Code](https://claude.ai/code) installed on your machine.
+- [Claude Code](https://claude.ai/code) installed on your machine.
+- **SSH access to the Infinum GitHub org.** This repo is private, and the
+  install command clones it over SSH. If `git clone git@github.com:infinum/design-claude-config.git`
+  works for you in a terminal, you're set. If not, follow GitHub's
+  [add an SSH key to your account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh)
+  guide and make sure you've been added to the Infinum org.
+- Node.js 24 (current LTS).
 
 ## Setup
 
 One command, no clone required:
 
 ```bash
-npx -y github:not-alpha/design-claude-config
+npx -y github:infinum/design-claude-config
 ```
 
 The script will:
@@ -37,12 +43,13 @@ After it finishes:
 If you'd rather inspect the script before running it, or you don't have Node:
 
 ```bash
-git clone https://github.com/not-alpha/design-claude-config.git
+git clone git@github.com:infinum/design-claude-config.git
 cd design-claude-config
 ./setup.sh
 ```
 
 Both paths run the same `setup.sh` — `npx` just clones to a tmp dir for you.
+Both require SSH access to the Infinum org (see Prerequisites).
 
 ## Updating
 
@@ -51,7 +58,7 @@ import line is added only if missing, and existing marketplaces aren't
 re-added.
 
 ```bash
-npx -y github:not-alpha/design-claude-config
+npx -y github:infinum/design-claude-config
 # or, if you cloned the repo:
 cd <clone> && git pull && ./setup.sh
 ```

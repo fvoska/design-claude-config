@@ -92,5 +92,5 @@ For the npx path specifically:
 npm pack && npx -y ./design-claude-config-*.tgz
 ```
 
-This simulates what `npx -y github:not-alpha/design-claude-config` will do
+This simulates what `npx -y github:infinum/design-claude-config` will do
 once pushed, without round-tripping through GitHub.

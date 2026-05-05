@@ -6,7 +6,7 @@
 //
 // Thin Node shim that execs setup.sh from the cloned repo. The real install
 // logic lives in setup.sh — keep it there so `git clone + ./setup.sh` and
-// `npx -y github:not-alpha/design-claude-config` always behave identically.
+// `npx -y github:infinum/design-claude-config` always behave identically.
 // =============================================================================
 
 const { spawnSync } = require("child_process");
